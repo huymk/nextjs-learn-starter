@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     // Login to Docker Hub (Make sure you have credentials set up in Jenkins)
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh '''
                         docker login -u $DOCKER_USER -p $DOCKER_PASS
                         docker push ${DOCKER_REGISTRY}/${DOCKER_REPO}:${IMAGE_TAG}
