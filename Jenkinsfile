@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY = 'docker.io'
-        DOCKER_REPO = 'huymk/reactjs-blog'
+        DOCKER_REPO = 'huymk/presentation'
         IMAGE_TAG = "${env.BUILD_ID}"  // Tag the Docker image with the Jenkins build ID
     }
 
