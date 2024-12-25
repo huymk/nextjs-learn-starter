@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY = 'docker.io'
-        DOCKER_REPO = 'huymk/presentation'
+        DOCKER_REPO = 'huymk/nextjs-learn-starter'
         IMAGE_TAG = "${env.BUILD_ID}"  // Tag the Docker image with the Jenkins build ID
     }
 
@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t ${DOCKER_REGISTRY}/${DOCKER_REPO}:${IMAGE_TAG} .'
+                    sh "docker build -t ${DOCKER_REGISTRY}/${DOCKER_REPO}:${IMAGE_TAG} ."
                 }
             }
         }
@@ -29,10 +29,10 @@ pipeline {
                 script {
                     // Login to Docker Hub (Make sure you have credentials set up in Jenkins)
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh '''
+                        sh """
                         docker login -u $DOCKER_USER -p $DOCKER_PASS
                         docker push ${DOCKER_REGISTRY}/${DOCKER_REPO}:${IMAGE_TAG}
-                        '''
+                        """
                     }
                 }
             }
